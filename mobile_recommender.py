@@ -6,6 +6,9 @@ class MobileRecommender:
 		self.company = ""
 		self.ram = 0
 		self.storage = 0
+		self.capacity = 0
+		self.price = 0
+		self.os = ""
 		self.filtered = []
 
 		# Store smartphone data in a list
@@ -20,7 +23,7 @@ class MobileRecommender:
 
 
 		window = Tk()
-		window.geometry('640x480')
+		window.geometry('600x400')
 		window.title("Mobile Recommender")
 
 		# Create menu bar
@@ -48,20 +51,66 @@ class MobileRecommender:
 		ram_menu.add_command(label = "6 GB", command = partial(self.setRam, 6))
 		ram_menu.add_command(label = "8 GB", command = partial(self.setRam, 8))
 
-		# To open a new window
+		# To open a new window to show the details of filtered smartphones
 		def createNewWindow():
 			self.getSpecification()
 			window2 = Toplevel(window)
-			window2.title("list")
-			#window2.geometry("400x400")
+			window2.title("Mobile Recommendations")
 			frame1 = Frame(window2)
 			frame1.pack()
 			if len(self.filtered) == 0:
 				print("No record found")
 				Label(frame1, text = "No record found in the database. Try selecting a different combination.").pack()
 			else:
+				row = 1
+				colors = ["#ccccff", "#ffcc99", "#ffff99", "#ffcccc", "#ccffcc"]
+				color = 0
 				for i in self.filtered:
-					Label(frame1, text = "Model Name: " + i["Model"] + "\n" + "Company: " + i["Company"] + "\n" + "RAM" + str(i["RAM"])).pack()
+					label1 = Label(frame1, text = "Model Name: ", font = "Times 16 bold", bg = colors[color])
+					label1.grid(row = row, column = 1, sticky = W)
+					label2 = Label(frame1, text = i["Model"], font = "Times 16", bg = colors[color])
+					label2.grid(row = row, column = 2, sticky = W)
+					row += 1
+					label3 = Label(frame1, text = "Company: ", font = "Times 16 bold", bg = colors[color])
+					label3.grid(row = row, column = 1, sticky = W)
+					label4 = Label(frame1, text = i["Company"], font = "Times 16", bg = colors[color])
+					label4.grid(row = row, column = 2, sticky = W)
+					row += 1
+					label5 = Label(frame1, text = "RAM: ", font = "Times 16 bold", bg = colors[color])
+					label5.grid(row = row, column = 1, sticky = W)
+					label6 = Label(frame1, text = str(i["RAM"]) + " GB", font = "Times 16", bg = colors[color])
+					label6.grid(row = row, column = 2, sticky = W)
+					row += 1
+					label9 = Label(frame1, text = "Internal Storage: ", font = "Times 16 bold", bg = colors[color])
+					label9.grid(row = row, column = 1, stick = W)
+					label10 = Label(frame1, text = str(i["Storage"]) + " GB", font = "Times 16", bg = colors[color])
+					label10.grid(row = row, column = 2, sticky = W)
+					row += 1
+					label7 = Label(frame1, text = "Battery Capacity: ", font = "Times 16 bold", bg = colors[color])
+					label7.grid(row = row, column = 1, sticky = W)
+					label8 = Label(frame1, text = str(i["BCapacity"]) + " mAh", font = "Times 16", bg = colors[color])
+					label8.grid(row = row, column = 2, sticky = W)
+					row += 1
+					label11 = Label(frame1, text = "Price: ", font = "Times 16 bold", bg = colors[color])
+					label11.grid(row = row, column = 1, sticky = W)
+					label12 = Label(frame1, text = "Rs. " + str(i["Price"]), font = "Times 16", bg = colors[color])
+					label12.grid(row = row, column = 2, sticky = W)
+					row += 1
+					label13 = Label(frame1, text = "OS: ", font = "Times 16 bold", bg = colors[color])
+					label13.grid(row = row, column = 1, sticky = W)
+					label14 = Label(frame1, text = i["OS"], font = "Times 16", bg = colors[color])
+					label14.grid(row = row, column = 2, sticky = W)
+					row += 1
+					labelline1 = Label(frame1, text = "_________________________________")
+					labelline2 = Label(frame1, text = "_________________________________")
+					labelline1.grid(row = row, column = 1)
+					labelline2.grid(row = row, column = 2)
+					row += 1
+					if color == 4:
+						color = 0
+					else:
+						color += 1
+
 
 		# Create a frame to show details of the filtered smarphones
 		frame = Frame(window)
