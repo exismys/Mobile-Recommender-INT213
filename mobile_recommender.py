@@ -23,7 +23,7 @@ class MobileRecommender:
 
 
 		window = Tk()
-		window.geometry('600x400') # Specify the size of window in pixels
+		window.geometry('400x300') # Specify the size of window in pixels
 		window.title("Mobile Recommender") # Set the title of the new window
 
 		# Create menu bar
@@ -101,8 +101,18 @@ class MobileRecommender:
 			self.getSpecification()
 			window2 = Toplevel(window)
 			window2.title("Mobile Recommendations")
-			frame1 = Frame(window2)
-			frame1.pack()
+			window2.geometry("500x650")
+			mainframe = Frame(window2)
+			canvas = Canvas(mainframe, width = 480, height = 650)
+			scrollbar = Scrollbar(mainframe, orient = "vertical", command = canvas.yview)
+			frame1 = Frame(canvas)
+			frame1.bind("<Configure>", lambda e: canvas.configure(scrollregion = canvas.bbox("all")))
+			canvas.create_window((0, 0), window = frame1, anchor = "nw")
+			canvas.configure(yscrollcommand = scrollbar.set)
+			mainframe.pack()
+			canvas.pack(side = "left", fill = "both", expand = True)
+			scrollbar.pack(side = "right", fill = "y")
+
 
 			# If no record was found in the filtered list
 			if len(self.filtered) == 0:
