@@ -79,68 +79,68 @@ class MobileRecommender:
 		# Create a pull-down menu namely "Company" and add it to menu bar
 		company_menu = Menu(menubar, tearoff = 0)
 		menubar.add_cascade(label = "Company", menu = company_menu)
-		company_menu.add_command(label = "Samsung", command = partial(self.setCompany, "Samsung"))
-		company_menu.add_command(label = "Google Pixel", command = partial(self.setCompany, "Google Pixel"))
+		company_menu.add_command(label = "Samsung", command = lambda: [self.setCompany("Samsung"), updateSelectionData()])
+		company_menu.add_command(label = "Google Pixel", command = lambda: [self.setCompany("Google Pixel"), updateSelectionData()])
 		company_menu.add_command(label = "Apple", command = lambda: [self.setCompany("Apple"), updateSelectionData()])
-		company_menu.add_command(label = "Asus", command = partial(self.setCompany, "Asus"))
-		company_menu.add_command(label = "Xiomi", command = partial(self.setCompany, "Xiomi"))
-		company_menu.add_command(label = "Huawei", command = partial(self.setCompany, "Huawei"))
-		company_menu.add_command(label = "OnePlus", command = partial(self.setCompany, "OnePlus"))
-		company_menu.add_command(label = "Sony", command = partial(self.setCompany, "Sony"))
-		company_menu.add_command(label = "Oppo", command = partial(self.setCompany, "Oppo"))
-		company_menu.add_command(label = "Vivo", command = partial(self.setCompany, "Vivo"))
+		company_menu.add_command(label = "Asus", command = lambda: [self.setCompany("Asus"), updateSelectionData()])
+		company_menu.add_command(label = "Xiomi", command = lambda: [self.setCompany("Xiomi"), updateSelectionData()])
+		company_menu.add_command(label = "Huawei", command = lambda: [self.setCompany("Huawei"), updateSelectionData()])
+		company_menu.add_command(label = "OnePlus", command = lambda: [self.setCompany("OnePlus"), updateSelectionData()])
+		company_menu.add_command(label = "Sony", command = lambda: [self.setCompany("Sony"), updateSelectionData()])
+		company_menu.add_command(label = "Oppo", command = lambda: [self.setCompany("Oppo"), updateSelectionData()])
+		company_menu.add_command(label = "Vivo", command = lambda: [self.setCompany("Vivo"), updateSelectionData()])
 
 		# Create a pull-down menu namely "RAM" and add it to menu bar
 		ram_menu = Menu(menubar, tearoff = 0)
 		menubar.add_cascade(label = "RAM", menu = ram_menu)
 		ram_menu.add_command(label = "1 GB", command = lambda : [self.setRam(1), updateSelectionData()])
-		ram_menu.add_command(label = "2 GB", command = partial(self.setRam, 2))
-		ram_menu.add_command(label = "3 GB", command = partial(self.setRam, 3))
-		ram_menu.add_command(label = "4 GB", command = partial(self.setRam, 4))
-		ram_menu.add_command(label = "6 GB", command = partial(self.setRam, 6))
-		ram_menu.add_command(label = "8 GB", command = partial(self.setRam, 8))
+		ram_menu.add_command(label = "2 GB", command = lambda : [self.setRam(2), updateSelectionData()])
+		ram_menu.add_command(label = "3 GB", command = lambda : [self.setRam(3), updateSelectionData()])
+		ram_menu.add_command(label = "4 GB", command = lambda : [self.setRam(4), updateSelectionData()])
+		ram_menu.add_command(label = "6 GB", command = lambda : [self.setRam(6), updateSelectionData()])
+		ram_menu.add_command(label = "8 GB", command = lambda : [self.setRam(8), updateSelectionData()])
 
 		# Create a pull-down menu namely "Storage" and add it to menu bar
 		storage_menu = Menu(menubar, tearoff = 0)
 		menubar.add_cascade(label = "Storage", menu = storage_menu)
-		storage_menu.add_command(label = "8 GB", command = partial(self.setStorage, 8))
-		storage_menu.add_command(label = "16 GB", command = partial(self.setStorage, 16))
-		storage_menu.add_command(label = "32 GB", command = partial(self.setStorage, 32))
-		storage_menu.add_command(label = "64 GB", command = partial(self.setStorage, 64))
-		storage_menu.add_command(label = "128 GB", command = partial(self.setStorage, 128))
-		storage_menu.add_command(label = "256 GB", command = partial(self.setStorage, 256))
+		storage_menu.add_command(label = "8 GB", command = lambda: [self.setStorage(8), updateSelectionData()])
+		storage_menu.add_command(label = "16 GB", command = lambda: [self.setStorage(16), updateSelectionData()])
+		storage_menu.add_command(label = "32 GB", command = lambda: [self.setStorage(32), updateSelectionData()])
+		storage_menu.add_command(label = "64 GB", command = lambda: [self.setStorage(64), updateSelectionData()])
+		storage_menu.add_command(label = "128 GB", command = lambda: [self.setStorage(128), updateSelectionData()])
+		storage_menu.add_command(label = "256 GB", command = lambda: [self.setStorage(256), updateSelectionData()])
 
 		# Create a pull-down menu namely "Battery Capacity" and add it to menu bar
 		battery_capacity_menu = Menu(menubar, tearoff = 0)
 		menubar.add_cascade(label = "Battery Capacity", menu = battery_capacity_menu)
-		battery_capacity_menu.add_command(label = "2000 mAh", command = partial(self.setBatteryCapacity, 2000))
-		battery_capacity_menu.add_command(label = "3000 mAh", command = partial(self.setBatteryCapacity, 3000))
-		battery_capacity_menu.add_command(label = "4000 mAh", command = partial(self.setBatteryCapacity, 4000))
-		battery_capacity_menu.add_command(label = "5000 mAh", command = partial(self.setBatteryCapacity, 5000))
-		battery_capacity_menu.add_command(label = "6000 mAh", command = partial(self.setBatteryCapacity, 6000))
-		battery_capacity_menu.add_command(label = "7000 mAh", command = partial(self.setBatteryCapacity, 7000))
-		battery_capacity_menu.add_command(label = "8000 mAh", command = partial(self.setBatteryCapacity, 8000))
+		battery_capacity_menu.add_command(label = "2000 mAh", command = lambda : [self.setBatteryCapacity(2000), updateSelectionData()])
+		battery_capacity_menu.add_command(label = "3000 mAh", command = lambda : [self.setBatteryCapacity(3000), updateSelectionData()])
+		battery_capacity_menu.add_command(label = "4000 mAh", command = lambda : [self.setBatteryCapacity(4000), updateSelectionData()])
+		battery_capacity_menu.add_command(label = "5000 mAh", command = lambda : [self.setBatteryCapacity(5000), updateSelectionData()])
+		battery_capacity_menu.add_command(label = "6000 mAh", command = lambda : [self.setBatteryCapacity(6000), updateSelectionData()])
+		battery_capacity_menu.add_command(label = "7000 mAh", command = lambda : [self.setBatteryCapacity(7000), updateSelectionData()])
+		battery_capacity_menu.add_command(label = "8000 mAh", command = lambda : [self.setBatteryCapacity(8000), updateSelectionData()])
 
 		# Create a pull-down menu namely "Price" and add it to menu bar
 		price_menu = Menu(menubar, tearoff = 0)
 		menubar.add_cascade(label = "Price", menu = price_menu)
-		price_menu.add_command(label = "10000", command = partial(self.setPrice, 10000))
-		price_menu.add_command(label = "15000", command = partial(self.setPrice, 10000))
-		price_menu.add_command(label = "20000", command = partial(self.setPrice, 10000))
-		price_menu.add_command(label = "30000", command = partial(self.setPrice, 10000))
-		price_menu.add_command(label = "40000", command = partial(self.setPrice, 10000))
-		price_menu.add_command(label = "50000", command = partial(self.setPrice, 10000))
-		price_menu.add_command(label = "70000", command = partial(self.setPrice, 10000))
-		price_menu.add_command(label = "100000", command = partial(self.setPrice, 10000))
-		price_menu.add_command(label = "125000", command = partial(self.setPrice, 10000))
-		price_menu.add_command(label = "150000", command = partial(self.setPrice, 10000))
-		price_menu.add_command(label = "More", command = partial(self.setPrice, 150001))
+		price_menu.add_command(label = "10000", command = lambda: [self.setPrice(10000), updateSelectionData()])
+		price_menu.add_command(label = "15000", command = lambda: [self.setPrice(15000), updateSelectionData()])
+		price_menu.add_command(label = "20000", command = lambda: [self.setPrice(20000), updateSelectionData()])
+		price_menu.add_command(label = "30000", command = lambda: [self.setPrice(30000), updateSelectionData()])
+		price_menu.add_command(label = "40000", command = lambda: [self.setPrice(40000), updateSelectionData()])
+		price_menu.add_command(label = "50000", command = lambda: [self.setPrice(50000), updateSelectionData()])
+		price_menu.add_command(label = "70000", command = lambda: [self.setPrice(70000), updateSelectionData()])
+		price_menu.add_command(label = "100000", command = lambda: [self.setPrice(100000), updateSelectionData()])
+		price_menu.add_command(label = "125000", command = lambda: [self.setPrice(125000), updateSelectionData()])
+		price_menu.add_command(label = "150000", command = lambda: [self.setPrice(150000), updateSelectionData()])
+		price_menu.add_command(label = "More", command = lambda: [self.setPrice(150000), updateSelectionData()])
 
 		# Create a pull-down menu namely "OS" and add it to menu bar
 		os_menu = Menu(menubar, tearoff = 0)
 		menubar.add_cascade(label = "OS", menu = os_menu)
-		os_menu.add_command(label = "Android", command = partial(self.setOS, "Android"))
-		os_menu.add_command(label = "IOS", command = partial(self.setOS, "IOS"))
+		os_menu.add_command(label = "Android", command = lambda : [self.setOS("Android"), updateSelectionData()])
+		os_menu.add_command(label = "IOS", command = lambda: [self.setOS("IOS"), updateSelectionData()])
 
 		# To open a new window to show the details of filtered smartphones
 		def createNewWindow():
@@ -255,6 +255,53 @@ class MobileRecommender:
 
 	# To filter data and put final filtered data into self.filtered
 	def getSpecification(self):
-		
+		filtered_data1 = []
+		filtered_data2 = []
+		data_track = 0
+		if self.company != "":
+			if data_track == 0:
+				for i in self.specifications:
+					if i["Company"] == self.company:
+						filtered_data1.append(i)
+				data_track = 1
+			elif data_track == 1:
+				for i in filtered_data1:
+					if i["Company"] == self.company:
+						filtered_data2.append(i)
+				filtered_data1 = []
+				data_track = 2
+			else:
+				for i in filtered_data2:
+					if i["Company"] == self.company:
+						filtered_data1.append(i)
+				filtered_data2 = []
+				data_track = 1
+
+		if self.ram != 0:
+			if data_track == 0:
+				for i in self.specifications:
+					if i["RAM"] >= self.ram:
+						filtered_data1.append(i)
+				data_track = 1
+			elif data_track == 1:
+				for i in filtered_data1:
+					if i["RAM"] >= self.ram:
+						filtered_data2.append(i)
+				filtered_data1 = []
+				data_track = 2
+			else:
+				for i in filtered_data2:
+					if i["RAM"] >= self.ram:
+						filtered_data1.append(i)
+				filtered_data2 = []
+				data_track = 1
+
+		if data_track == 0:
+			self.filtered = self.specifications
+		elif data_track == 1:
+			self.filtered = filtered_data1
+		else:
+			self.filtered = filtered_data2
+
 
 MobileRecommender()
