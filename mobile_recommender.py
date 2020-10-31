@@ -23,19 +23,65 @@ class MobileRecommender:
 
 
 		window = Tk()
-		window.geometry('400x300') # Specify the size of window in pixels
+		window.geometry('400x350') # Specify the size of window in pixels
 		window.title("Mobile Recommender") # Set the title of the new window
 
 		# Create menu bar
 		menubar = Menu(window) # Create a menubar
 		window.config(menu = menubar) # Display the menu bar
 
+		# Create a frame to show details of the filtered smarphones
+		frame = Frame(window)
+		frame.pack()
+
+		# Show the user selection data in frame
+		Label(frame, text = "").grid(row = 1, column = 1)
+		def updateSelectionData():
+			row = 2
+			colors = ["#ccccff", "#ffcc99", "#ffff99", "#ffcccc", "#ccffcc"]
+			color = 0 # To assign different colors to each iteration of result
+			label3 = Label(frame, text = "Company: ", font = "Times 16 bold", bg = colors[color])
+			label3.grid(row = row, column = 1, sticky = W)
+			label4 = Label(frame, text = self.company, font = "Times 16", bg = colors[color])
+			label4.grid(row = row, column = 2, sticky = W)
+			row += 1
+			color += 1
+			label5 = Label(frame, text = "Minimum RAM: ", font = "Times 16 bold", bg = colors[color])
+			label5.grid(row = row, column = 1, sticky = W)
+			label6 = Label(frame, text = str(self.ram) + " GB", font = "Times 16", bg = colors[color])
+			label6.grid(row = row, column = 2, sticky = W)
+			row += 1
+			color += 1
+			label9 = Label(frame, text = "Minimum Internal Storage: ", font = "Times 16 bold", bg = colors[color])
+			label9.grid(row = row, column = 1, stick = W)
+			label10 = Label(frame, text = str(self.storage) + " GB", font = "Times 16", bg = colors[color])
+			label10.grid(row = row, column = 2, sticky = W)
+			row += 1
+			color += 1
+			label7 = Label(frame, text = "Minimum Battery Capacity: ", font = "Times 16 bold", bg = colors[color])
+			label7.grid(row = row, column = 1, sticky = W)
+			label8 = Label(frame, text = str(self.capacity) + " mAh", font = "Times 16", bg = colors[color])
+			label8.grid(row = row, column = 2, sticky = W)
+			row += 1
+			color += 1
+			label11 = Label(frame, text = "Price: (Under)", font = "Times 16 bold", bg = colors[color])
+			label11.grid(row = row, column = 1, sticky = W)
+			label12 = Label(frame, text = "Rs. " + str(self.price), font = "Times 16", bg = colors[color])
+			label12.grid(row = row, column = 2, sticky = W)
+			row += 1
+			color = 0
+			label13 = Label(frame, text = "OS: ", font = "Times 16 bold", bg = colors[color])
+			label13.grid(row = row, column = 1, sticky = W)
+			label14 = Label(frame, text = self.os, font = "Times 16", bg = colors[color])
+			label14.grid(row = row, column = 2, sticky = W)
+		updateSelectionData()
+
 		# Create a pull-down menu namely "Company" and add it to menu bar
 		company_menu = Menu(menubar, tearoff = 0)
 		menubar.add_cascade(label = "Company", menu = company_menu)
 		company_menu.add_command(label = "Samsung", command = partial(self.setCompany, "Samsung"))
 		company_menu.add_command(label = "Google Pixel", command = partial(self.setCompany, "Google Pixel"))
-		company_menu.add_command(label = "Apple", command = partial(self.setCompany, "Apple"))
+		company_menu.add_command(label = "Apple", command = lambda: [self.setCompany("Apple"), updateSelectionData()])
 		company_menu.add_command(label = "Asus", command = partial(self.setCompany, "Asus"))
 		company_menu.add_command(label = "Xiomi", command = partial(self.setCompany, "Xiomi"))
 		company_menu.add_command(label = "Huawei", command = partial(self.setCompany, "Huawei"))
@@ -47,7 +93,7 @@ class MobileRecommender:
 		# Create a pull-down menu namely "RAM" and add it to menu bar
 		ram_menu = Menu(menubar, tearoff = 0)
 		menubar.add_cascade(label = "RAM", menu = ram_menu)
-		ram_menu.add_command(label = "1 GB", command = partial(self.setRam, 1))
+		ram_menu.add_command(label = "1 GB", command = lambda : [self.setRam(1), updateSelectionData()])
 		ram_menu.add_command(label = "2 GB", command = partial(self.setRam, 2))
 		ram_menu.add_command(label = "3 GB", command = partial(self.setRam, 3))
 		ram_menu.add_command(label = "4 GB", command = partial(self.setRam, 4))
@@ -170,13 +216,17 @@ class MobileRecommender:
 					else:
 						color += 1 # Otherwise set color to next color
 
-
-		# Create a frame to show details of the filtered smarphones
-		frame = Frame(window)
-		frame.pack()
-
 		# Create a button to show the details of filtered smartphones and add it to frame
-		Button(frame, text = "Show", command = createNewWindow).pack()
+		Label(frame, text = "").grid(row = 8, column = 1)
+		Button(frame, text = "Show", command = createNewWindow).grid(row = 9, column = 2)
+
+		# Create frame2 to put "How to: "
+		frame2 = Frame(window)
+		frame2.pack()
+		Label(frame2, text = "").pack()
+		Label(frame2, text = "How To", font = "Times 13 bold").pack()
+		Label(frame2, text = "Please choose specifictions from menus in menu bar and then click on \"Show\" button to see your mobile Recommendations.", wraplength = 380).pack()
+
 		window.mainloop()
 
 	def setCompany(self, company):
@@ -205,16 +255,6 @@ class MobileRecommender:
 
 	# To filter data and put final filtered data into self.filtered
 	def getSpecification(self):
-		temp_filtered = []
-		temp_filtered2 = []
-		for i in self.specifications:
-			if i["RAM"] >= self.ram:
-				temp_filtered.append(i)
-		for i in temp_filtered:
-			if self.company != "":
-				if i["Company"] == self.company:
-					temp_filtered2.append(i)
-					temp_filtered = []
-		self.filtered = temp_filtered2
+		
 
 MobileRecommender()
