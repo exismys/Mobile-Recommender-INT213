@@ -3,24 +3,52 @@ from functools import partial
 
 class MobileRecommender:
 	def __init__(self):
-		self.company = ""
+		self.company = None
 		self.ram = 0
 		self.storage = 0
 		self.capacity = 0
-		self.price = 0
-		self.os = ""
+		self.price = None
+		self.os = None
 		self.filtered = []
 
 		# Store smartphone data in a list
 		self.specifications = [
+		{"Model": "Apple iPhone 8 Plus", "Company": "Apple", "RAM": 2, "Storage": 256, "BCapacity": 2691, "Price": 46130, "OS": "iOS"},
+		{"Model": "Samsung Galaxy M10s", "Company": "Samsung", "RAM": 3, "Storage": 32, "BCapacity": 4000, "Price": 8999, "OS": "Android"},
+		{"Model": "Samsung Galaxy M30", "Company": "Samsung", "RAM": 4, "Storage": 64, "BCapacity": 5000, "Price": 12999, "OS": "Android"},
+		{"Model": "Samsung Galaxy M30", "Company": "Samsung", "RAM": 3, "Storage": 32, "BCapacity": 5000, "Price": 10999, "OS": "Android"},
+		{"Model": "Samsung Galaxy S20 Ultra", "Company": "Samsung", "RAM": 12, "Storage": 128, "BCapacity": 5000, "Price": 92999, "OS": "Android"},
+		{"Model": "Samsung Galaxy S20 FE", "Company": "Samsung", "RAM": 8, "Storage": 128, "BCapacity": 4500, "Price": 49999, "OS": "Android"},
+		{"Model": "Samsung Galaxy S20", "Company": "Samsung", "RAM": 8, "Storage": 128, "BCapacity": 4000, "Price": 65499, "OS": "Android"},
+		{"Model": "Samsung Galaxy A31", "Company": "Samsung", "RAM": 6, "Storage": 128, "BCapacity": 5000, "Price": 19999, "OS": "Android"},
+		{"Model": "Samsung Galaxy A21s", "Company": "Samsung", "RAM": 4, "Storage": 64, "BCapacity": 5000, "Price": 14999, "OS": "Android"},
+		{"Model": "Samsung Galaxy Note 10 Plus", "Company": "Samsung", "RAM": 12, "Storage": 256, "BCapacity": 4300, "Price": 59999, "OS": "Android"},
+		{"Model": "Apple iPhone 12 Mini", "Company": "Apple", "RAM": 4, "Storage": 256, "BCapacity": 2227, "Price": 69900, "OS": "iOS"},
+		{"Model": "Apple iPhone 12 Pro Max", "Company": "Apple", "RAM": 6, "Storage": 512, "BCapacity": 3687, "Price": 129900, "OS": "iOS"},
+		{"Model": "Apple iPhone 12", "Company": "Apple", "RAM": 4, "Storage": 256, "BCapacity": 2851, "Price": 79900, "OS": "iOS"},
+		{"Model": "Apple iPhone SE", "Company": "Apple", "RAM": 3, "Storage": 64, "BCapacity": 1821, "Price": 32999, "OS": "iOS"},
+		{"Model": "Apple iPhone 11", "Company": "Apple", "RAM": 4, "Storage": 64, "BCapacity": 3110, "Price": 49999, "OS": "iOS"},
 		{"Model": "Samsung Galaxy M30s", "Company": "Samsung", "RAM": 4, "Storage": 64, "BCapacity": 6000, "Price": 13999, "OS": "Android"},
 		{"Model": "Samsung Galaxy M51", "Company": "Samsung", "RAM": 6, "Storage": 128, "BCapacity": 7000, "Price": 22499, "OS": "Android"},
 		{"Model": "Samsung Galaxy M31", "Company": "Samsung", "RAM": 6, "Storage": 64, "BCapacity": 6000, "Price": 15499, "OS": "Android"},
 		{"Model": "Samsung Galaxy M11", "Company": "Samsung", "RAM": 3, "Storage": 32, "BCapacity": 5000, "Price": 9399, "OS": "Android"},
-		{"Model": "Samsung Galaxy M10s", "Company": "Samsung", "RAM": 3, "Storage": 32, "BCapacity": 4000, "Price": 8999, "OS": "Android"},
-		{"Model": "Samsung Galaxy M30", "Company": "Samsung", "RAM": 4, "Storage": 64, "BCapacity": 5000, "Price": 12999, "OS": "Android"},
-		{"Model": "Samsung Galaxy M30", "Company": "Samsung", "RAM": 3, "Storage": 32, "BCapacity": 5000, "Price": 10999, "OS": "Android"}]
-
+		{"Model": "Apple iPhone 11 Pro", "Company": "Apple", "RAM": 6, "Storage": 64, "BCapacity": 3190, "Price": 79999, "OS": "iOS"},
+		{"Model": "Apple iPhone X", "Company": "Apple", "RAM": 3, "Storage": 64, "BCapacity": 2716, "Price": 57999, "OS": "iOS"},
+		{"Model": "Google Pixel 4A", "Company": "Google Pixel", "RAM": 6, "Storage": 128, "BCapacity": 2140, "Price": 31999, "OS": "Android"},
+		{"Model": "Google Pixel 3A", "Company": "Google Pixel", "RAM": 4, "Storage": 64, "BCapacity": 3000, "Price": 30999, "OS": "Android"},
+		{"Model": "Google Pixel 3", "Company": "Google Pixel", "RAM": 4, "Storage": 64, "BCapacity": 2915, "Price": 71000, "OS": "Android"},
+		{"Model": "Huawei Y9s", "Company": "Huawei", "RAM": 6, "Storage": 128, "BCapacity": 4000, "Price": 19900, "OS": "Android"},
+		{"Model": "Huawei P30 Lite", "Company": "Huawei", "RAM": 4, "Storage": 128, "BCapacity": 3340, "Price": 16055, "OS": "Android"},
+		{"Model": "Huawei P30 Pro", "Company": "Huawei", "RAM": 8, "Storage": 256, "BCapacity": 4200, "Price": 56490, "OS": "Android"},
+		{"Model": "Huawei Mate 20 Pro", "Company": "Huawei", "RAM": 6, "Storage": 128, "BCapacity": 4200, "Price": 31999, "OS": "Android"},
+		{"Model": "OnePlus 8T", "Company": "OnePlus", "RAM": 12, "Storage": 256, "BCapacity": 4500, "Price": 42999, "OS": "Android"},
+		{"Model": "Redmi 9i", "Company": "Xiaomi", "RAM": 4, "Storage": 64, "BCapacity": 5000, "Price": 8299, "OS": "Android"},
+		{"Model": "Redmi Note 8", "Company": "Xiaomi", "RAM": 4, "Storage": 64, "BCapacity": 4000, "Price": 11499, "OS": "Android"},
+		{"Model": "Sony Xperia L2", "Company": "Sony", "RAM": 3, "Storage": 32, "BCapacity": 3300, "Price": 15900, "OS": "Android"},
+		{"Model": "Sony Xperia XZ2", "Company": "Sony", "RAM": 6, "Storage": 64, "BCapacity": 3180, "Price": 74990, "OS": "Android"},
+		{"Model": "Sony Xperia R1", "Company": "Sony", "RAM": 2, "Storage": 16, "BCapacity": 2620, "Price": 9990, "OS": "Android"},
+		{"Model": "OPPO A33", "Company": "OPPO", "RAM": 3, "Storage": 32, "BCapacity": 5000, "Price": 11990, "OS": "Android"},
+		{"Model": "Vivo Y20", "Company": "Vivo", "RAM": 4, "Storage": 64, "BCapacity": 5000, "Price": 12990, "OS": "Android"}]
 
 		window = Tk()
 		window.geometry('400x350') # Specify the size of window in pixels
@@ -66,7 +94,7 @@ class MobileRecommender:
 			color += 1
 			label11 = Label(frame, text = "Price: (Under)", font = "Times 16 bold", bg = colors[color])
 			label11.grid(row = row, column = 1, sticky = W)
-			label12 = Label(frame, text = "Rs. " + str(self.price), font = "Times 16", bg = colors[color])
+			label12 = Label(frame, text = str(self.price), font = "Times 16", bg = colors[color])
 			label12.grid(row = row, column = 2, sticky = W)
 			row += 1
 			color = 0
@@ -158,7 +186,6 @@ class MobileRecommender:
 			mainframe.pack()
 			canvas.pack(side = "left", fill = "both", expand = True)
 			scrollbar.pack(side = "right", fill = "y")
-
 
 			# If no record was found in the filtered list
 			if len(self.filtered) == 0:
@@ -258,7 +285,7 @@ class MobileRecommender:
 		filtered_data1 = []
 		filtered_data2 = []
 		data_track = 0
-		if self.company != "":
+		if self.company != None:
 			if data_track == 0:
 				for i in self.specifications:
 					if i["Company"] == self.company:
@@ -334,7 +361,7 @@ class MobileRecommender:
 				filtered_data2 = []
 				data_track = 1
 
-		if self.price != 0:
+		if self.price != None:
 			if data_track == 0:
 				for i in self.specifications:
 					if i["Price"] <= self.price:
@@ -353,7 +380,7 @@ class MobileRecommender:
 				filtered_data2 = []
 				data_track = 1
 
-		if self.os != "":
+		if self.os != None:
 			if data_track == 0:
 				for i in self.specifications:
 					if i["OS"] == self.os:
@@ -378,6 +405,5 @@ class MobileRecommender:
 			self.filtered = filtered_data1
 		else:
 			self.filtered = filtered_data2
-
 
 MobileRecommender()
