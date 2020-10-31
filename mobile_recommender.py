@@ -296,6 +296,82 @@ class MobileRecommender:
 				filtered_data2 = []
 				data_track = 1
 
+		if self.storage != 0:
+			if data_track == 0:
+				for i in self.specifications:
+					if i["Storage"] >= self.storage:
+						filtered_data1.append(i)
+				data_track = 1
+			elif data_track == 1:
+				for i in filtered_data1:
+					if i["Storage"] >= self.storage:
+						filtered_data2.append(i)
+				filtered_data1 = []
+				data_track = 2
+			else:
+				for i in filtered_data2:
+					if i["Storage"] >= self.storage:
+						filtered_data1.append(i)
+				filtered_data2 = []
+				data_track = 1
+
+		if self.capacity != 0:
+			if data_track == 0:
+				for i in self.specifications:
+					if i["BCapacity"] >= self.capacity:
+						filtered_data1.append(i)
+				data_track = 1
+			elif data_track == 1:
+				for i in filtered_data1:
+					if i["BCapacity"] >= self.capacity:
+						filtered_data2.append(i)
+				filtered_data1 = []
+				data_track = 2
+			else:
+				for i in filtered_data2:
+					if i["BCapacity"] >= self.capacity:
+						filtered_data1.append(i)
+				filtered_data2 = []
+				data_track = 1
+
+		if self.price != 0:
+			if data_track == 0:
+				for i in self.specifications:
+					if i["Price"] <= self.price:
+						filtered_data1.append(i)
+				data_track = 1
+			elif data_track == 1:
+				for i in filtered_data1:
+					if i["Price"] <= self.price:
+						filtered_data2.append(i)
+				filtered_data1 = []
+				data_track = 2
+			else:
+				for i in filtered_data2:
+					if i["Price"] <= self.price:
+						filtered_data1.append(i)
+				filtered_data2 = []
+				data_track = 1
+
+		if self.os != "":
+			if data_track == 0:
+				for i in self.specifications:
+					if i["OS"] == self.os:
+						filtered_data1.append(i)
+				data_track = 1
+			elif data_track == 1:
+				for i in filtered_data1:
+					if i["OS"] == self.os:
+						filtered_data2.append(i)
+				filtered_data1 = []
+				data_track = 2
+			else:
+				for i in filtered_data2:
+					if i["OS"] == self.os:
+						filtered_data1.append(i)
+				filtered_data2 = []
+				data_track = 1
+
 		if data_track == 0:
 			self.filtered = self.specifications
 		elif data_track == 1:
