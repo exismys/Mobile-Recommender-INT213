@@ -174,7 +174,7 @@ class MobileRecommender:
 		def createNewWindow():
 			self.getSpecification()
 			window2 = Toplevel(window)
-			window2.title("Mobile Recommendations")
+			window2.title("Results")
 			window2.geometry("500x650")
 			mainframe = Frame(window2)
 			canvas = Canvas(mainframe, width = 480, height = 650)
